@@ -1,6 +1,19 @@
 import { cart ,removeFromCart} from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
+import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js'; // ESM version of external library
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';  // default export
+
+console.log(hello());
+
+// getting current date
+const today = dayjs();
+//adding 7 days in current date
+const deliveryDate = today.add(7,'days');
+
+console.log(deliveryDate.format('dddd, MMMM D')); //format to display date
+
+deliveryDate.format()
 
 
 let cartSummaryHTML ='';
