@@ -17,15 +17,14 @@ deliveryDate.format()
 
 
 let cartSummaryHTML ='';
-
-// looping through our cart items to get product ID
+// looping through our cart items to get product ID and generate the html
 cart.forEach((cartItem)=>{
 
   const productId = cartItem.productId  // this will give us product id
 
   let matchingProduct ; // from this we can get the product all information(other properties)
 
-  // from products array checking if our current productId is in products array or not and if yes then making matchingProduct equals to product in arr
+  // from products array checking if our current productId is in products array or not and if yes then making matchingProduct equals to product in arr to get its full info.
   products.forEach((product)=>{
     if(product.id === productId){
       matchingProduct = product;
@@ -116,6 +115,8 @@ cart.forEach((cartItem)=>{
     `;
 });
 
+
+//puttng the html generated for cartSummary into webpage using DOM
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
 // console.log(cartSummaryHTML);

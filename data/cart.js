@@ -40,7 +40,6 @@ export function addToCart(productId){
       quantity : 1
     });
   }
-
   //after updating the cart(adding product in cart)
   saveToStorage();
 }
@@ -54,8 +53,6 @@ export function removeFromCart(productId){
       newCart.push(cartItem);
     }
   });
-
   cart = newCart;
-
   saveToStorage();
 }

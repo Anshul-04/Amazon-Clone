@@ -5,6 +5,7 @@ import { formatCurrency } from "./utils/money.js";
 
 let productsHTML = '';
 // for each product we will create HTML
+// here we are generating HTML using js DOM and storing it as a sting in productHTML variable
 products.forEach((product) => {
 
   productsHTML += `
@@ -65,7 +66,7 @@ products.forEach((product) => {
 // console.log(productsHTML);
 
 
-
+// for updating the number of items in our cart
 function updateCartQuantity(){
   // calculating total item in cart
   let cartQuantity =0;
@@ -77,10 +78,12 @@ function updateCartQuantity(){
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
 
-// taking html and put in on the webpage using DOM
+// selecting an html element ,putting the html we have created using js and put in on the webpage using DOM
 document.querySelector('.js-products-grid').
 innerHTML = productsHTML ;
 
+
+// this is for the Add to cart button
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click',() => {
