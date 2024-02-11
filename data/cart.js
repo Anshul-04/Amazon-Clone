@@ -1,14 +1,18 @@
-export let cart = JSON.parse(localStorage.getItem('cart'));
+export let cart = JSON.parse(localStorage.getItem('cart')); // getting the cart from local storage
 
+// if the our cart is null then give it a default value
 if(!cart){
   cart = [
     {
     productId : 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-    quantity : 2
+    quantity : 2 ,
+    deliveryOptionId : '1'
     },
     {
       productId : '15b6fc6f-327a-4ec4-896f-486349e85a3d',
-      quantity : 1
+      quantity : 1,
+      deliveryOptionId : '2'
+
     }];
 }
 
@@ -37,7 +41,8 @@ export function addToCart(productId){
   // adding it to cart 
   cart.push({
       productId : productId,
-      quantity : 1
+      quantity : 1,
+      deliveryOptionId : '1'
     });
   }
   //after updating the cart(adding product in cart)
@@ -46,6 +51,13 @@ export function addToCart(productId){
 
 // removing item from cart when we click delete button
 export function removeFromCart(productId){
+  /*
+  to delet the product from cart
+  1.create a new array
+  2.loop through the array and add each product from cart into array except 
+    the product to be deleted
+
+  */
   const newCart=[];
 
   cart.forEach((cartItem) => {
@@ -53,6 +65,6 @@ export function removeFromCart(productId){
       newCart.push(cartItem);
     }
   });
-  cart = newCart;
+  cart = newCart; // updating the cart to new cart
   saveToStorage();
 }
