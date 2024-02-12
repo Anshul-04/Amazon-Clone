@@ -5,16 +5,17 @@ import { formatCurrency } from "../utils/money.js";
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js'; // Using ESM version of external library using js modules method
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';  // this syntax of exporting is called default export
 import { deliveryOptions,getDeliveryOption } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
-
-
+/*
 hello();
-// getting current date using external library Dayjs
+getting current date using external library Dayjs
 const today = dayjs();
 
-//adding 7 days in current date
+adding 7 days in current date
 const deliveryDate = today.add(7,'days');
 console.log(deliveryDate.format('dddd, MMMM D')); //format to display date
+*/
 
 
 export function renderOrderSummary(){
@@ -139,20 +140,22 @@ export function renderOrderSummary(){
   //puttng the html generated for cartSummary into webpage using DOM
   document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
-  // console.log(cartSummaryHTML);
 
   //select all delet links
   document.querySelectorAll('.js-delete-link').forEach((link) => {
+
     link.addEventListener('click',() => {
       const productId = link.dataset.productId;
-      removeFromCart(productId);
-      // console.log(cart);
+      removeFromCart(productId);    
 
       // removing deleted product from page (update the HTML after deleting the product from cart)
       const container = document.querySelector(`
         .js-cart-item-container-${productId}`
       );
-      container.remove(); // using DOM remove method
+
+      container.remove(); // using DOM remove() method to romve the html element from page
+
+      renderPaymentSummary(); //regenerate the payment summary html when we delete any product from cart
     });
   });
 
@@ -167,6 +170,7 @@ export function renderOrderSummary(){
         const {productId,deliveryOptionId} = element.dataset;
         updateDeliveryOption(productId,deliveryOptionId);
         renderOrderSummary();
+        renderPaymentSummary(); // when we change delivery option so it update(regenrate html of) the payment summary
       });
     });
 }

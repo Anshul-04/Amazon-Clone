@@ -4,6 +4,7 @@ import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import {formatCurrency} from "../utils/money.js";
 
 export function renderPaymentSummary(){
+
   let productPriceCents = 0;
   let shippingPriceCents =0;
 
@@ -21,6 +22,7 @@ export function renderPaymentSummary(){
   const taxCents = totalBeforeTaxCents * 0.1 ;
   const totalPriceCents = totalBeforeTaxCents + taxCents;
 
+  // updating the payment summary HTML 
   const paymentSummaryHTML = ` 
     <div class="payment-summary-title">
       Order Summary
@@ -65,7 +67,7 @@ export function renderPaymentSummary(){
       Place your order
     </button>
   `;
-
+  // selecting payment summary html div element and generating HTML using js
   document.querySelector('.js-payment-summary')
     .innerHTML = paymentSummaryHTML;
 
