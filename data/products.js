@@ -1,3 +1,18 @@
+
+export function getProduct(productId){
+  let matchingProduct ; // from this we can get the product all information(other properties)
+
+  // from products array checking if our current productId is in products array or not and if yes then making matchingProduct equals to product in arr to get its full info.
+  products.forEach((product)=>{
+    if(product.id === productId){
+      matchingProduct = product;
+    }
+  });
+  
+  return matchingProduct;
+}
+
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",

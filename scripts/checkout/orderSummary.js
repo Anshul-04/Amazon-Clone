@@ -1,10 +1,10 @@
 import { cart ,removeFromCart,updateDeliveryOption} from "../../data/cart.js";// this syntax of exporting is called Named export
 
-import { products } from "../../data/products.js";
+import { products ,getProduct} from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js'; // Using ESM version of external library using js modules method
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';  // this syntax of exporting is called default export
-import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { deliveryOptions,getDeliveryOption } from "../../data/deliveryOptions.js";
 
 
 
@@ -26,27 +26,15 @@ export function renderOrderSummary(){
 
     const productId = cartItem.productId  // this will give us product id
 
-    let matchingProduct ; // from this we can get the product all information(other properties)
-
-    // from products array checking if our current productId is in products array or not and if yes then making matchingProduct equals to product in arr to get its full info.
-    products.forEach((product)=>{
-      if(product.id === productId){
-        matchingProduct = product;
-      }
-    });
-
+    const matchingProduct = getProduct(productId); // from this we can get the product all information(other properties)
+   
     // console.log(matchingProduct);
 
     //getting deliveryOptionId out of the cart
     const deliveryOptionId = cartItem.deliveryOptionId;
 
-    let deliveryOption ;
-
-    deliveryOptions.forEach((option)=>{
-      if(option.id === deliveryOptionId){
-        deliveryOption = option;
-      }
-    });
+    const deliveryOption = getDeliveryOption(deliveryOptionId) ;
+   
 
     const today = dayjs() ;
     const deliveryDate = today.add(
